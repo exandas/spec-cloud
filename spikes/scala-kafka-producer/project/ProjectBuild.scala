@@ -6,6 +6,7 @@ object BuildDependencies {
   private val AKKA_STREAMS_VERSION = "2.0-M1"
   private val JSON4S_VERSION = "3.3.0.RC3"
   private val MACWIRE_VERSION = "2.1.0"
+  private val KAFKA_CLIENT_VERSION = "0.10.1.1"
 
   // Dependencies
   val akkaStreams =       "com.typesafe.akka"             %% "akka-stream-experimental"                  % AKKA_STREAMS_VERSION
@@ -32,9 +33,12 @@ object BuildDependencies {
   val macwireUtil =       "com.softwaremill.macwire"      %% "util"                                      % MACWIRE_VERSION
   val macwireProxy =      "com.softwaremill.macwire"      %% "proxy"                                     % MACWIRE_VERSION
   val macwire =           macwireMacros :: macwireUtil :: macwireProxy :: Nil
+  val kafkaClient =       "net.cakesolutions"             %% "scala-kafka-client"                         % KAFKA_CLIENT_VERSION
+  val akkaKafkaClient =   "net.cakesolutions"             %% "scala-kafka-client-akka"                    % KAFKA_CLIENT_VERSION
 
   // Resolvers
   val hseebergerResolver = "hseeberger at bintray" at "http://dl.bintray.com/hseeberger/maven"
+  val cakeSolutionsResolver = Resolver.bintrayRepo("cakesolutions", "maven")
 }
 
 object BuildSettings {
@@ -51,7 +55,8 @@ object BuildSettings {
 
   lazy val coreSettings = Seq(
     resolvers ++= Seq(
-      hseebergerResolver
+      hseebergerResolver,
+      cakeSolutionsResolver
     ),
     libraryDependencies ++= Seq(
       akkaActor,
