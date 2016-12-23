@@ -16,6 +16,7 @@ package object core {
     this: Core =>
 
     val test: ActorRef
+    val events: ActorRef
 
   }
 

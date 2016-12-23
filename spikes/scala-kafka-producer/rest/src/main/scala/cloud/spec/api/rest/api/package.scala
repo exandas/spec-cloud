@@ -19,12 +19,19 @@ package object api {
 
     import Directives._
 
-    val routes =
-      logHeaders { ip =>
-        encodeResponse {
-          new TestService(test).route
-        }
-      }
+    val routes = new KafkaService(events).route
+//    val routes = logHeaders { ip =>
+//      encodeResponse {
+//        new TestService(test).route
+//      }
+//    }
+//      logHeaders { ip =>
+//        encodeResponse {
+//          val actorRef = kafka
+//          println(actorRef.toString())
+//          new KafkaService(actorRef).route
+//        }
+//      }
   }
 
   case class AppRejection(error: AppError) extends Rejection

@@ -2,18 +2,15 @@ import sbt.Keys._
 import sbt._
 
 object BuildDependencies {
-  private val AKKA_VERSION = "2.3.12"
-  private val AKKA_STREAMS_VERSION = "2.0-M1"
+  private val AKKA_VERSION = "2.4.14"
+  private val AKKA_STREAMS_VERSION = "2.4.14"
   private val JSON4S_VERSION = "3.3.0.RC3"
   private val MACWIRE_VERSION = "2.1.0"
   private val KAFKA_CLIENT_VERSION = "0.10.1.1"
 
   // Dependencies
-  val akkaStreams =       "com.typesafe.akka"             %% "akka-stream-experimental"                  % AKKA_STREAMS_VERSION
-  val akkaHttpCore =      "com.typesafe.akka"             %% "akka-http-core-experimental"               % AKKA_STREAMS_VERSION
-  val akkaHttp =          "com.typesafe.akka"             %% "akka-http-experimental"                    % AKKA_STREAMS_VERSION
-  val akkaHttpTestKit =   "com.typesafe.akka"             %% "akka-http-testkit-experimental"            % AKKA_STREAMS_VERSION   % "test"
-  val akkaHttpSprayJson = "com.typesafe.akka"             %% "akka-http-spray-json-experimental"         % AKKA_STREAMS_VERSION
+  val akkaStreams =       "com.typesafe.akka"             %% "akka-stream"                               % AKKA_STREAMS_VERSION
+  val akkaHttp =          "com.typesafe.akka"             %% "akka-http"                                 % "10.0.0"
   val akkaActor =         "com.typesafe.akka"             %% "akka-actor"                                % AKKA_VERSION
   val akkaTestKit =       "com.typesafe.akka"             %% "akka-testkit"                              % AKKA_VERSION           % "test"
   val akkaRemote =        "com.typesafe.akka"             %% "akka-remote"                               % AKKA_VERSION
@@ -67,7 +64,9 @@ object BuildSettings {
       casbah,
       logback,
       commonsCodec,
-      scalaTest
+      scalaTest,
+      kafkaClient,
+      akkaKafkaClient
     ) ++ macwire,
     autoAPIMappings := true,
     scalacOptions in Test ++= Seq("-Yrangepos", "-deprecation")
@@ -81,9 +80,7 @@ object BuildSettings {
       akkaActor,
       akkaRemote,
       akkaStreams,
-      akkaHttpCore,
       akkaHttp,
-      akkaHttpTestKit,
       akkaHttpJson4s,
       json4sCore,
       json4sNative,
@@ -92,7 +89,9 @@ object BuildSettings {
       eaioUuid,
       logback,
       commonsCodec,
-      scalaTest
+      scalaTest,
+      kafkaClient,
+      akkaKafkaClient
     ),
     autoAPIMappings := true,
     scalacOptions in Test ++= Seq("-Yrangepos", "-deprecation")

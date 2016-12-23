@@ -15,6 +15,8 @@ object Imports extends UuidHelper {
       */
     def toUUID = {
 
+      println(s"******* length is ${value.length} *********")
+
       if (value.length != 16) {
         throw new IllegalArgumentException("Length of array must be exactly 16")
       }

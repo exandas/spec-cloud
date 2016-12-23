@@ -13,14 +13,15 @@ trait BootedWeb extends Web with Api with RestActors with Core with JsonSupport 
 
   import Implicits._
 
-  override implicit lazy val system = ActorSystem("scala-kafka-producer")
 
   override implicit lazy val executor = system.dispatcher
+
+  override implicit lazy val system = ActorSystem("scala-kafka-producer")
 
   override implicit lazy val materializer: Materializer = ActorMaterializer()
 
   Http().bindAndHandle(routes, "localhost", 8080)
 
-  sys.addShutdownHook(system.shutdown())
+  sys.addShutdownHook(system.terminate())
 
 }

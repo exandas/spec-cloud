@@ -8,5 +8,6 @@ trait CoreActors extends CoreActorRefs {
   this: Core =>
 
   override lazy val test: ActorRef = system.actorOf(Props(classOf[TestActor], new MongoTestDataMapper("test")), "TestActor")
+  override lazy val events: ActorRef = system.actorOf(Props(classOf[EventPublisher]))
 
 }
