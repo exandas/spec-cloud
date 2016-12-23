@@ -27,7 +27,7 @@ class EventPublisher extends Actor{
   val producer = KafkaProducer(
     Conf(new StringSerializer(), new StringSerializer(), acks = "all").withConf(ConfigFactory.parseString(
       s"""
-         | bootstrap.servers = "localhost:32768"
+         | bootstrap.servers = "localhost:9092"
   """.stripMargin))
   )
 
